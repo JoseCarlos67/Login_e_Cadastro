@@ -1,31 +1,76 @@
-let nome = document.querySelector("#nome")
-let labelNome = document.querySelector("#labelNome")
+const form = document.getElementById('form')
+const nome = document.getElementById('nome')
+const email = document.getElementById('email')
+const tel = document.getElementById('tel')
+const cpf = document.getElementById('cpf')
+const senha = document.getElementById('senha')
+const confirmSenha = document.getElementById('confirmSenha')
 
-let email = document.querySelector("#email")
-let labelEmail = document.querySelector("#labelEmail")
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
 
-let tel = document.querySelector("#tel")
-let labelTel = document.querySelector("#labelTel")
-
-let cpf = document.querySelector("#cpf")
-let labelCpf = document.querySelector("#labelCpf")
-
-let senha = document.querySelector("#senha")
-let labelSenha = document.querySelector("#labelSenha")
-
-let confirmSenha = document.querySelector("#confirmSenha")
-let labelConfirmSenha = document.querySelector("#labelConfirmSenha")
-
-nome.addEventListener("keyup", ()=>{
-    if (nome.value.length<=2) {
-        labelNome.setAttribute("style", "color:red")
-        labelNome.innerHTML = ("<strong>Nome inavalido</strong>")
-    } else {
-        labelNome.setAttribute("style", "color: green")
-        labelNome.innerHTML = "None"
-    }
+    checkInputs()
 })
 
-function cadastrar() {
+function checkInputs() {
+    const nomeValue = nome.value.trim()
+    const emailValue = email.value.trim()
+    const telValue = tel.value.trim()
+    const cpfValue = cpf.value.trim()
+    const senhaValue = senha.value.trim()
+    const confirmSenhaValue = confirmSenha.value.trim()
+
+    if (nomeValue === ''){
+        errorValidation(nome, 'Preencha esse campo!')
+   } else {
+        successValidation(nome)
+   }
+
+    if (emailValue ==='') {
+        errorValidation(email, 'Preencha esse campo!')
+    } else {
+        successValidation(email)
+    }
+
+    if (telValue === '') {
+        errorValidation(tel, 'Preencha esse campo!')
+    } else {
+        successValidation(tel)
+    }
+
+    if (cpfValue === '') {
+        errorValidation(cpf, 'Preencha esse campo!')
+    } else {
+        successValidation(cpf)
+    }
     
+    if (senhalValue === '') {
+        errorValidation(senha, 'Preencha esse campo!')
+    } else if (senhaValue.length < 8){
+        errorValidation(senha, 'A senha deve ter mais de 8 caracteres!')
+    } else {
+        successValidation(senha)
+    }
+
+    if (confirmSenhaValue === '') {
+        errorValidation(confirmSenha, 'Preencha esse campo!')
+    } else if (senhaValue != confirmSenha){
+        errorValidation(confirmSenha, 'As senhas não conferem')
+    } else {
+        successValidation(confirmSenha)
+    }
+
+}
+//Validação
+function errorValidation(input, message) {
+    const formControl = input.parentElement;
+    const small = formControl.querySelector('saml')
+    small.innerText = message
+
+    formControl.className = 'form-control error'
+}
+function successValidation(input) {
+    const formControl = input.parentElement;
+
+    formControl.className = 'form-control success'
 }
