@@ -44,8 +44,8 @@ function checkInputs() {
         successValidation(cpf)
     }
     
-    if (senhalValue === '') {
-        errorValidation(senha, 'Preencha esse campo!')
+    if (senhaValue === '') {
+        errorValidation(senha, 'Preencha esse campo senha!')
     } else if (senhaValue.length < 8){
         errorValidation(senha, 'A senha deve ter mais de 8 caracteres!')
     } else {
@@ -64,7 +64,7 @@ function checkInputs() {
 //Validação
 function errorValidation(input, message) {
     const formControl = input.parentElement;
-    const small = formControl.querySelector('saml')
+    const small = formControl.querySelector('samll')
     small.innerText = message
 
     formControl.className = 'form-control error'
